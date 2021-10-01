@@ -20,6 +20,6 @@
         background-color: $cyan;
         border-radius: 20px;
         color: #fff;
-        padding: 8px 20px;
+        padding: 10px 24px;
     }
 </style>

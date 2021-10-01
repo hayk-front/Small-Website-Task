@@ -10,9 +10,14 @@
     export default {
         name: 'App',
         mounted() {
-            if(localStorage.getItem('currentUser')){
+            if(localStorage.getItem('currentUser')
+                && localStorage.getItem('currentUser') !== 'admin'){
                 this.$router.push('/').catch((e)=>{console.log(e)})
-            }else{
+            }else if(localStorage.getItem('currentUser')
+                && localStorage.getItem('currentUser') === 'admin'){
+                this.$router.push('/admin').catch((e)=>{console.log(e)})
+            }
+            else{
                 this.$router.push('/login').catch((e)=>{console.log(e)})
             }
         }

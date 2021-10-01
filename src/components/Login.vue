@@ -2,7 +2,13 @@
     <div class="login G-flex G-flex-column G-align-center">
         <h2>Welcome to Shortly</h2>
         <label for="username-input">Username: </label>
-        <input ref="usernameInput" type="text" id="username-input" name="name" />
+        <input
+                ref="usernameInput"
+                type="text"
+                id="username-input"
+                name="name"
+                placeholder="enter username"
+        />
         <CyanButton
                 :inner-text="'Log in'"
                 :style="{ borderRadius: 20 + 'px' }"
@@ -22,8 +28,12 @@
         methods: {
             login(){
                 if(this.$refs.usernameInput && this.$refs.usernameInput.value){
-                    localStorage.setItem('currentUser', this.$refs.usernameInput.value.toLowerCase())
-                    this.$router.push('/').catch((e) => { console.log(e) } )
+                    localStorage.setItem('currentUser', this.$refs.usernameInput.value.toLowerCase());
+                    if(localStorage.getItem('currentUser') !== 'admin'){
+                        this.$router.push('/').catch((e) => { console.log(e) } )
+                    }else{
+                        this.$router.push('/admin').catch((e) => { console.log(e) } )
+                    }
                 }
             }
         }
@@ -34,7 +44,7 @@
     @import "../assets/scss/variables";
 
     .login {
-        margin: 10% auto;
+        margin: 15% auto;
         padding: 1% 2%;
         width: 25%;
         min-width: 300px;
@@ -49,8 +59,12 @@
         }
 
         input{
-            margin-bottom: 3%;
-            padding: 5px;
+            margin: 3% 0 5%;
+            padding: 8px 12px;
+            border: none;
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 15px;
+            box-shadow : 4px 4px 8px rgb(192, 183, 183), -4px -4px 8px white;
             outline: none;
             border-radius: 8px;
         }

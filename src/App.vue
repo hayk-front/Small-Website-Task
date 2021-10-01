@@ -1,28 +1,30 @@
 <template>
     <div id="app">
-        <Login/>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
     import './assets/scss/style.scss'
-    import Login from "./components/Login";
 
     export default {
         name: 'App',
-        components: {
-            Login
-        },
+        mounted() {
+            if(localStorage.getItem('currentUser')){
+                this.$router.push('/').catch((e)=>{console.log(e)})
+            }else{
+                this.$router.push('/login').catch((e)=>{console.log(e)})
+            }
+        }
     }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
+    @import "./assets/scss/variables";
 
     #app {
-        font-family             : Avenir, Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing  : antialiased;
-        -moz-osx-font-smoothing : grayscale;
-        text-align              : center;
-        color                   : #2c3e50;
+        font-family: 'Poppins', Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+        color: $grey;
     }
 
 </style>
